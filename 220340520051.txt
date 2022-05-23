@@ -1,0 +1,76 @@
+Que.NO.1
+===========
+use kunal;
+create table dept
+(
+    DEPTNO int,
+    DNAME varchar(15),
+    LOC varchar(10),
+    primary key(DEPTNO)
+);
+drop table dept;
+insert into dept values (10,'ACCOUNTING', 'NEW YORK'),
+						(20, 'RESEARCH', 'DALLAS'),
+						(30, 'SALES' ,'CHICAGO'),
+						(40, 'OPERATIONS', 'BOSTON');
+select * from dept;
+===============================================
+
+que 2.
+create table emp
+(
+	EMPNO int,
+	ENAME varchar(10),
+	JOB varchar(9),
+	HIREDATE date,
+	SAL float,
+	COMM float,
+	DEPTNO int,
+    primary key(EMPNO),
+    foreign key (DEPTNO) references dept (DEPTNO)
+);
+
+drop table emp;
+insert into emp (EMPNO,ENAME,JOB,HIREDATE,SAL,COMM,DEPTNO)
+values (7839, 'KING', 'MANAGER', '1991-11-17', 5000, NULL, 10),
+(7698, 'BLAKE','CLERK', '1981-05-01' ,2850, NULL ,30),
+(7782, 'CLARK', 'MANAGER' ,'1981-06-09' ,2450 ,NULL, 10),
+(7566,' JONES', 'CLERK', '1981-04-02' ,2975 ,NULL ,20),
+(7654, 'MARTIN', 'SALESMAN', '1981-09-28' ,1250 ,1400, 30),
+(7499, 'ALLEN' ,'SALESMAN' ,'1981-02-20', 1600 ,300 ,30);
+
+select * from emp;
+====================================================
+ que 3 ==> select * from EMP where SAL between 2500 and 5000;
+
+ que 4 ==> select * from EMP order by ENAME desc;
+
+ que 5 ==> select lower(JOB) from EMP;
+
+ que 6 ==> select ENAME ,length(ENAME) FROM EMP;
+
+ que 7 ==> select DEPTNO, COUNT(*)FROM EMP GROUP BY DEPTNO;
+
+ que 8 ==> select DNAME,ENAME FROM DEPT,EMP WHERE DEPT.DEPTNO = EMP.DEPTNO;
+
+ que 9 ==> select ENAME,POSITION('AR'IN ENAME) AS FIRST_Occ_ER FROM EMP;
+
+ que 10 ==> select ENAME,SAL,SAL*0.2 AS HRA FROM EMP;
+ 
+=================================================================================
+section 2
+ que 1
+delimiter //
+create function FUNC1(a number ,b number ,c number)
+return boolean ;
+deterministic
+begin 
+  declare a int;
+  declare b int;
+  declare c int;
+  
+
+ if NOT(a+b>=c and b+c>=a and c+a>=b) then Raise invalid_triangle;
+ else  
+      return true;
+end if;
